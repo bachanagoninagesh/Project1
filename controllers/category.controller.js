@@ -21,6 +21,22 @@ export const getAllCategories = async (req, res) => {
   }
 };
 
+export const deleteCategory = async (req, res) => {
+    try {
+      const id = req.params.id;
+      const deleted = await Category.destroy({ where: { id } });
+  
+      if (deleted) {
+        res.json({ message: 'Category deleted successfully.' });
+      } else {
+        res.status(404).json({ message: 'Category not found.' });
+      }
+    } catch (err) {
+      res.status(500).json({ message: err.message });
+    }
+  };
+  
+
 export const getCategoryById = async (req, res) => {
   try {
     const category = await Category.findByPk(req.params.id, { include: db.products });

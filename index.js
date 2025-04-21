@@ -20,6 +20,11 @@ db.sequelize.authenticate()
   .catch(err => {
     console.error('❌ Error connecting DB:', err);
   });
+  // Sync DB with force
+db.sequelize.sync({ force: true }).then(() => {
+    console.log('✅ Database re-synced (force).');
+  });
+  
 
 // Routes
 app.use('/api/products', productRoutes);

@@ -3,16 +3,34 @@ import db from '../models/index.js';
 
 const Product = db.products;
 
+  
+// Create a new product
 // Create a new product
 export const createProduct = async (req, res) => {
-  try {
-    const { name, price, description, imageUrl } = req.body;
-    const product = await Product.create({ name, price, description, imageUrl });
-    res.status(201).json(product);
-  } catch (err) {
-    res.status(500).json({ message: err.message });
-  }
-};
+    try {
+      const { name, price, description, imageUrl, categoryId } = req.body;
+  
+      // Validation check
+      if (!name || !price || !categoryId) {
+        return res.status(400).json({
+          message: "Name, price, and categoryId are required.",
+        });
+      }
+  
+      const product = await Product.create({
+        name,
+        price,
+        description,
+        imageUrl,
+        categoryId,
+      });
+  
+      res.status(201).json(product);
+    } catch (err) {
+      res.status(500).json({ message: err.message });
+    }
+  };
+  
 
 // Get all products
 export const getAllProducts = async (req, res) => {

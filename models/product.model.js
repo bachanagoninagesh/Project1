@@ -15,6 +15,10 @@ const Product = (sequelize, DataTypes) => {
       imageUrl: {
         type: DataTypes.STRING,
       },
+      categoryId: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
     });
   };
   
