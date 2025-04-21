@@ -3,8 +3,6 @@ import db from './models/index.js';
 import productRoutes from './routes/product.routes.js';
 import categoryRoutes from './routes/category.routes.js';
 
-
-
 const app = express();
 app.use(express.json());
 
@@ -12,7 +10,7 @@ app.use(express.json());
 db.sequelize.authenticate()
   .then(() => {
     console.log('✅ MySQL connected.');
-    return db.sequelize.sync(); // sync all models
+    return db.sequelize.sync(); // ✅ Safe sync: only creates tables if not exists
   })
   .then(() => {
     console.log('✅ Database synced.');
@@ -20,15 +18,11 @@ db.sequelize.authenticate()
   .catch(err => {
     console.error('❌ Error connecting DB:', err);
   });
-  // Sync DB with force
-db.sequelize.sync({ force: true }).then(() => {
-    console.log('✅ Database re-synced (force).');
-  });
-  
 
 // Routes
 app.use('/api/products', productRoutes);
 app.use('/api/categories', categoryRoutes);
+
 app.get('/', (req, res) => {
   res.send('☕ Coffee Shop API is running!');
 });
