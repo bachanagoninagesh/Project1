@@ -17,7 +17,8 @@ export const getAllCategories = async (req, res) => {
     const categories = await Category.findAll({ include: db.products });
     res.json(categories);
   } catch (err) {
-    res.status(500).json({ message: err.message });
+    let errorMessage = err?.message ? err.message : 'An error occurred while fetching categories.';
+    res.status(500).json({ message: errorMessage });
   }
 };
 
