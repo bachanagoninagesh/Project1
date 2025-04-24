@@ -2,8 +2,8 @@
 
 {
   "development": {
-    "username": "root",
-    "password": "Nagesh@123",
+    "username": "dbuser",
+    "password": "dbuser",
     "database": "coffee_shop",
     "host": "127.0.0.1",
     "dialect": "mysql"
